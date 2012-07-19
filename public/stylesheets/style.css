@@ -1,0 +1,63 @@
+body {
+  font-family: "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 13px;
+  text-align: center;
+  text-stroke: 1px rgba(255,255,255,0.1);
+  color: #555;
+}
+h1,
+h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #343434;
+}
+h1 {
+  text-shadow: 1px 2px 2px #ddd;
+  font-size: 60px;
+}
+#warbles {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+#warbles .warble {
+  border-style: solid;
+  border-width: medium;
+  margin: 20px;
+}
+#warbles .warble .creator {
+  align: left;
+  font-weight: bold;
+  background-color: CornflowerBlue;
+}
+#warbles .warble .created_at {
+  align: right;
+  font-weight: bold;
+  background-color: CornflowerBlue;
+}
+#warbles .warble .body {
+  background-color: White;
+}
+#warbles .warble .reply {
+  text-align: right;
+}
+#warbles .warble .delete {
+  text-align: right;
+}
+.warble .created_at {
+  text-align: left;
+}
+.warble input[type =text] {
+  width: 490px;
+  margin-left: 16px;
+}
+.warble input[type =button],
+.warble input[type =submit] {
+  text-align: left;
+  margin-left: 440px;
+}
+.warble textarea {
+  width: 490px;
+  height: 90px;
+}

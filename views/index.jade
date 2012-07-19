@@ -1,0 +1,15 @@
+h1= title
+#warbles
+    - each warble in warbles
+      div.warble
+        div.creator= warble.creator
+        div.created_at= warble.created_at
+        div.body= warble.body
+        div.reply
+          a(href='Warble/reply/#{warble._id}')
+            img(src="images/reply.png", width=24, height=24)
+        div.delete
+          a(href='Warble/delete/#{warble._id}')
+            img(src="images/trash.jpg", width=24, height=24)
+
+<p align="left"><a href="Warble/new">New warble</a></p>
