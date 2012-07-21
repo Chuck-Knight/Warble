@@ -1,4 +1,6 @@
 body {
+  background: url("/images/background.png") no-repeat;
+  background-color: #f2e8d4;
   font-family: "Helvetica Neue", "Lucida Grande", "Arial";
   font-size: 13px;
   text-align: center;
@@ -26,28 +28,21 @@ h1 {
   border-width: medium;
   margin: 20px;
 }
-#warbles .warble .creator {
-  align: left;
-  font-weight: bold;
-  background-color: CornflowerBlue;
+#warbles .warble .header {
+  background-color: #c08f60;
 }
-#warbles .warble .created_at {
-  align: right;
+#warbles .warble .header .creator {
+  text-align: left;
   font-weight: bold;
-  background-color: CornflowerBlue;
+}
+#warbles .warble .header .created_at {
+  text-align: right;
+  font-weight: bold;
 }
 #warbles .warble .body {
-  background-color: White;
+  background-color: #f2e8d4;
 }
-#warbles .warble .reply {
-  text-align: right;
-}
-#warbles .warble .delete {
-  text-align: right;
-}
-.warble .created_at {
-  text-align: left;
-}
+.warble .created_at,
 .warble input[type =text] {
   width: 490px;
   margin-left: 16px;

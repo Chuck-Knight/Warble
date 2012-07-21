@@ -1,4 +1,6 @@
 body
+  background url("/images/background.png") no-repeat
+  background-color #F2E8D4
   font-family "Helvetica Neue", "Lucida Grande", "Arial"
   font-size 13px
   text-align center
@@ -11,6 +13,7 @@ h1, h2
 h1
   text-shadow 1px 2px 2px #ddd
   font-size 60px
+
 #warbles
   text-align left
   margin-left auto
@@ -20,23 +23,18 @@ h1
     border-style:solid;
     border-width:medium
     margin 20px
-    .creator
-        align left
-        font-weight bold
-        background-color CornflowerBlue
-    .created_at
-        align right
-        font-weight bold
-        background-color CornflowerBlue
+    .header
+       background-color #C08F60
+       .creator
+          text-align left
+          font-weight bold
+       .created_at
+          text-align right
+          font-weight bold
     .body
-        background-color White
-    .reply
-        text-align: right
-    .delete
-        text-align: right
+       background-color #F2E8D4
 .warble
   .created_at
-    text-align left
   input[type =text]
     width 490px
     margin-left 16px
