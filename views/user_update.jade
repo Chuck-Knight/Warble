@@ -1,0 +1,23 @@
+h1= title
+form( method="post")
+    div
+        div
+            span FirstName :
+            input(type="text", name="firstname", id="createUserFirstname", readonly="readonly", value=firstname)
+        div
+            span LastName :
+            input(type="text", name="lastname", id="createUserLastname", readonly="readonly", value=lastname)
+        div
+            span Email :
+            input(type="text", name="email", id="createUserEmail", value=email)
+        div
+            span UserId :
+            input(type="text", name="userid", id="createUserUserid", readonly="readonly", value=userid)
+        div
+            span Password :
+            input(type="password", name="password", id="createUserPassword", value=password)
+        div
+            span Re-enter Password :
+            input(type="password", name="reenterpassword", id="createUserReenterPassword", value=password)
+        dev#editWarbleSubmit
+            input(type="submit", value="Send")

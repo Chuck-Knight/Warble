@@ -1,16 +1,12 @@
-
-/**
- * Module dependencies.
- */
-
+/////////////////////////////////////////////
+// Module dependencies.
 var express = require('express');
-var ArticleProvider = require('./warbleprovider-mongodb').WarbleProvider;
-
+var WarbleProvider = require('./warbleprovider-mongodb').WarbleProvider;
 
 var app = module.exports = express.createServer();
 
+/////////////////////////////////////////////
 // Configuration
-
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -29,14 +25,18 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+// The user id of the user accessing the application
 app.me= "Chuck Knight";
 
+/////////////////////////////////////////////
 // Routes
-
 var warbleProvider= new WarbleProvider('localhost', 27017);
+var userProvider= new UserProvider('localhost', 27017);
 
+
+// Handle a request to render the display of current Warbles
 app.get('/', function(req, res){
-    warbleProvider.findAll( function(error,docs){
+    warbleProvider.retrieveAll( function(error,docs){
         res.render('index.jade', { locals: {
             title: 'Warble',
             warbles:docs
@@ -45,6 +45,7 @@ app.get('/', function(req, res){
     })
 });
 
+// Handle a request to render the new Warble page
 app.get('/Warble/new', function(req, res) {
     res.render('warble_new.jade', { locals: {
         title: 'New Warble'
@@ -52,29 +53,85 @@ app.get('/Warble/new', function(req, res) {
     });
 });
 
+// Handle the POST of a REST new warble request
 app.post('/Warble/new', function(req, res){
-    warbleProvider.save({
-        creator: req.param('creator'),
+    warbleProvider.create({
+        creator: app.me,
         body: req.param('body')
     }, function( error, docs) {
         res.redirect('/')
     });
 });
 
+// Handle REST delete requests
 app.get('/Warble/delete/:id', function(req, res) {
-    warbleProvider.removeById(req.params.id, function(error, warble) {
+    warbleProvider.delete(req.params.id, function(error, warble) {
         res.redirect('/')
     });
 });
 
+// Handle a REST get request
 app.get('/Warble/:id', function(req, res) {
-    warbleProvider.findById(req.params.id, function(error, warble) {
+    warbleProvider.retrieve(req.params.id, function(error, warble) {
         res.render('warble_show.jade',
         { locals: {
             creator: warble.creator,
             warble:warble
         }
         });
+    });
+});
+
+/////////////////////////////////////////////
+// Handle a request to render the new user page
+app.get('/Warble/user/new', function(req, res) {
+    res.render('user_new.jade', { locals: {
+        title: 'New User'
+    }
+    });
+});
+
+// Handle the POST of a REST new user request
+app.post('/Warble/user/new', function(req, res){
+    // TODO: Validate that passwords match
+    // TODO: Make sure userid chosen is unique
+    userProvider.create({
+        firstname: req.param('firstname'),
+        lastname: req.param('lastname'),
+        email: req.param('email'),
+        userid: req.param('userid'),
+        password: req.param('password')
+    }, function( error, docs) {
+        res.redirect('/')
+    });
+});
+
+// Handle a request to render the update user page
+app.get('/Warble/user/update', function(req, res) {
+    userProvider.retrieveByUserId(app.me, function(error, user) {
+        res.render('user_update.jade', { locals: {
+            title: 'Update User',
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            userid: user.userid,
+            password: user.password
+        }
+        });
+    });
+});
+
+// Handle the POST of a REST new user request
+app.post('/Warble/user/update', function(req, res){
+    // TODO: Validate that passwords match
+    userProvider.create({
+        firstname: req.param('firstname'),
+        lastname: req.param('lastname'),
+        email: req.param('email'),
+        userid: req.param('userid'),
+        password: req.param('password')
+    }, function( error, docs) {
+        res.redirect('/')
     });
 });
 
