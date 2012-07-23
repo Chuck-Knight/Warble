@@ -1,9 +1,9 @@
 h1= title
 form( method="post")
-    div
+    div.new_warble
         div
             span Creator :
-            input(type="text", name="creator", id="editWarbleCreator")
+            input(type="text", name="creator", id="editWarbleCreator", readonly="readonly", value=creator)
         div
             span Body :
             textarea( name="body", rows=20, id="editWarbleBody)
