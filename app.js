@@ -60,8 +60,25 @@ app.get('/', function(req, res) {
 
 // Handle the POST from the login page
 app.post('/', function(req, res){
-    req.session.userid = req.param('userid');
-        res.redirect('/Warble')
+    userProvider.retrieveByUserId(req.param('userid'), function(error, user) {
+        if (user != null)
+        {
+            // User found
+            // TODO: validate password
+            req.session.userid = req.param('userid');
+            res.redirect('/Warble')
+        }
+        else
+        {
+            // Not valid, request retry
+            res.render('user_login.jade', { locals: {
+                title: 'Login failed, try again',
+                userid: req.param('userid'),
+                password: ''
+            }
+            });
+        }
+    });
 });
 
 // Handle a request to display current Warbles
